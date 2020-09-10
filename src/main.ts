@@ -3,7 +3,7 @@ import { input } from "./lib/readline"
 import * as fs from "fs";
 let app = async () => {
     let path: string = await input('请输入文件路径：');
-    let d:x.WorkBook;
+    let d: x.WorkBook;
     try {
         d = x.readFile(path);
     } catch (error) {
@@ -24,17 +24,17 @@ let app = async () => {
         });
         for (let i = 2; i <= idlist.length; i++) {
             list[cfg['A' + i].v] = {};
-            for (let j = 0; j < idlist.length / keys.length; j++) {
-                if(j==0){
+            for (let j = 0; j < keys.length / idlist.length; j++) {
+                if (j == 0) {
                     list[cfg['A' + i].v][cfg[alist[j] + 1].v] = cfg[alist[j] + i].w;
-                }else{
+                } else {
                     list[cfg['A' + i].v][cfg[alist[j] + 1].v] = cfg[alist[j] + i].v;
                 }
             }
         }
         let idx = path.lastIndexOf('\\');
         fs.writeFile(path.substr(0, idx) + '\\' + key + '.json', JSON.stringify(list), (d) => {
-            console.log('成功生成文件：'+key + '.json');
+            console.log('成功生成文件：' + key + '.json');
         });
     }
 }
