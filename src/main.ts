@@ -24,11 +24,15 @@ let app = async () => {
         });
         for (let i = 2; i <= idlist.length; i++) {
             list[cfg['A' + i].v] = {};
-            for (let j = 0; j < idlist.length/keys.length ; j++) {
+            for (let j = 0; j < keys.length / idlist.length; j++) {
                 if (j == 0) {
                     list[cfg['A' + i].v][cfg[alist[j] + 1].v] = cfg[alist[j] + i].w;
                 } else {
-                    list[cfg['A' + i].v][cfg[alist[j] + 1].v] = cfg[alist[j] + i].v;
+                    let value = cfg[alist[j] + i].v;
+                    if (value.indexOf('[') > -1 || value.indexOf('{') > -1) {
+                        value = JSON.parse(value);
+                    }
+                    list[cfg['A' + i].v][cfg[alist[j] + 1].v] = value;
                 }
             }
         }
