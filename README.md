@@ -6,3 +6,5 @@
 npm install
 
 npm run serve
+
+注意第一行是key
